@@ -1,4 +1,4 @@
-name: Push to QGG CSG
+name: Push to QGG-Computational-Statistics
 on:
   push:
     branches: [ main ]  # Triggers on pushes to `main` in your personal repo
@@ -12,7 +12,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.GH_PAT }}  # Your PAT for authentication
 
       - name: Configure Git
         run: |
@@ -21,7 +20,7 @@ jobs:
 
       - name: Add organization repository as remote
         run: |
-          git remote add org https://x-access-token:${{ secrets.ORG_PAT }}@github.com/QGG-Computational-Statistics/LocalAncestry.jl.git
+          git remote add org https://x-access-token:${{ secrets.QGG_PAT }}@github.com/QGG-Computational-Statistics/LocalAncestry.jl.git
           git fetch org
 
       - name: Push changes to organization repository
