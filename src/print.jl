@@ -1,4 +1,3 @@
-
 function printinput(chromosome, referencepath, targetpath, ancestrypath, threshold, printlevel, maf)
 
     println("")
