@@ -1,0 +1,29 @@
+name: Push to QGG CSG
+on:
+  push:
+    branches: [ main ]  # Triggers on pushes to `main` in your personal repo
+  workflow_dispatch:    # Allows manual triggering
+
+jobs:
+  push-to-org:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout personal repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_PAT }}  # Your PAT for authentication
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "bjarke.poulsen@pm.me"
+          git config --global user.name "BgroveP"
+
+      - name: Add organization repository as remote
+        run: |
+          git remote add org https://x-access-token:${{ secrets.ORG_PAT }}@github.com/QGG-Computational-Statistics/LocalAncestry.jl.git
+          git fetch org
+
+      - name: Push changes to organization repository
+        run: |
+          git push org main
