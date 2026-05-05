@@ -6,6 +6,7 @@ on:
 
 jobs:
   sync:
+    if: github.repository == 'BgroveP/LocalAncestry.jl'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout personal repository
