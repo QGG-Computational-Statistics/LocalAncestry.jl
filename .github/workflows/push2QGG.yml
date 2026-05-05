@@ -1,8 +1,8 @@
 name: Push to QGG-Computational-Statistics
 on:
   push:
-    branches: [ main ]  # Triggers on pushes to `main` in your personal repo
-  workflow_dispatch:    # Allows manual triggering
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   push-to-org:
@@ -18,11 +18,11 @@ jobs:
           git config --global user.email "bjarke.poulsen@pm.me"
           git config --global user.name "BgroveP"
 
-      - name: Add organization repository as remote
+      - name: Add organization repository as remote with PAT
         run: |
           git remote add org https://x-access-token:${{ secrets.QGG_PAT }}@github.com/QGG-Computational-Statistics/LocalAncestry.jl.git
           git fetch org
 
       - name: Push changes to organization repository
         run: |
-          git push org main
+          git push https://x-access-token:${{ secrets.QGG_PAT }}@github.com/QGG-Computational-Statistics/LocalAncestry.jl.git main
