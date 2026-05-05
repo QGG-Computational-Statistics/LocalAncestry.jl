@@ -18,11 +18,10 @@ jobs:
           git config --global user.email "bjarke.poulsen@pm.me"
           git config --global user.name "BgroveP"
 
-      - name: Add organization repository as remote with PAT
+      - name: Push changes to organization repository
         run: |
           git remote add org https://x-access-token:${{ secrets.QGG_PAT }}@github.com/QGG-Computational-Statistics/LocalAncestry.jl.git
           git fetch org
-
-      - name: Push changes to organization repository
-        run: |
+          git checkout main
+          git merge org/main --no-edit -X theirs  # Prefer their changes if conflicts
           git push https://x-access-token:${{ secrets.QGG_PAT }}@github.com/QGG-Computational-Statistics/LocalAncestry.jl.git main
