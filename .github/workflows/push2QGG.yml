@@ -12,21 +12,17 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.QGG_PAT }}  # Use PAT for checkout
+          token: ${{ secrets.QGG_PAT }}
 
       - name: Configure Git
         run: |
           git config --global user.email "bjarke.poulsen@pm.me"
           git config --global user.name "BgroveP"
 
-      - name: Add organization repository as remote with PAT
+      - name: Add organization repository as remote
         run: |
           git remote add org https://x-access-token:${{ secrets.QGG_PAT }}@github.com/QGG-Computational-Statistics/LocalAncestry.jl.git
 
-      - name: Fetch from organization
+      - name: Mirror everything to organization
         run: |
-          git fetch org
-
-      - name: Push to organization repository
-        run: |
-          git push https://x-access-token:${{ secrets.QGG_PAT }}@github.com/QGG-Computational-Statistics/LocalAncestry.jl.git main
+          git push --mirror org
