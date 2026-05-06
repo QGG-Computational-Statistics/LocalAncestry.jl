@@ -22,7 +22,7 @@ jobs:
 
       - name: Add organization repository as remote
         run: |
-          git remote add org https://x-access-token:${{ secrets.QGG_PAT }}@github.com/QGG-Computational-Statistics/LocalAncestry.jl.git
+          git remote add org https://x-access-token:${{ secrets.QGG_PAT }}@github.com/QGG-Computational-Genomics/LocalAncestry.jl.git
 
       - name: Mirror everything to organization
         run: |
